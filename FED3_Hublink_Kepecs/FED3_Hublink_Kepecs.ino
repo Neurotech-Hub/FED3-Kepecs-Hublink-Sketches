@@ -43,7 +43,7 @@ void handleFRFeeding()
   {
     fed3.ConditionedStimulus();
     fed3.Feed();
-    fed3.BNC(500, 1);
+    // fed3.BNC(500, 1);
   }
 }
 
@@ -56,7 +56,7 @@ void handlePRFeeding()
     pellets_in_current_block++;
     fed3.BlockPelletCount = pellets_in_current_block;
     fed3.Feed();
-    fed3.BNC(500, 1);
+    // fed3.BNC(500, 1);
     poke_num = 0;
   }
 }
