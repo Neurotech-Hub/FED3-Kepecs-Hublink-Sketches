@@ -1,0 +1,49 @@
+# Arduino build and debug files
+build/
+debug/
+*.hex
+*.elf
+*.bin
+
+# Arduino IDE specific
+.vscode/
+.idea/
+*.tmp
+*.bak
+*.swp
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Dependencies
+libraries/
+__pycache__/
+*.pyc
+
+# Hardware specific
+*.eep
+*.lss
+*.lst
+*.map
+*.sym
+
+# Debug files
+*.log
+debug.cfg
+*.gdb
+
+# Backup files
+*~
+*.bak
+*.backup
+
+# Private configuration
+secrets.h
+credentials.h
+config.h 
