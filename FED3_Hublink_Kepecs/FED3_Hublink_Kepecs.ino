@@ -25,6 +25,41 @@ void setup()
   if (hublink.begin())
   {
     Serial.println("✓ Hublink.");
+    fed3.DisplayText("Sync Hublink?\nYES: Poke right\nNO: Poke left");
+    delay(1000); // debounce previous mouse menu
+    unsigned long startTime = millis();
+    bool doSync = false;
+    bool success = false;
+    while (millis() - startTime < 10000)
+    {
+      if (fed3.Left)
+      {
+        break;
+      }
+      if (fed3.Right)
+      {
+        doSync = true;
+        fed3.DisplayText("Syncing Hublink...\nAdvertising name:\n" + String(hublink.advertise));
+        success = hublink.sync(120); // sync for 120 seconds
+        break;
+      }
+    }
+
+    fed3.Left = false;
+    fed3.Right = false;
+
+    while (!fed3.Left && !fed3.Right)
+    {
+      if (success)
+      {
+        fed3.DisplayText("Hublink synced!\nPoke any to exit");
+      }
+      else
+      {
+        fed3.DisplayText("Hublink sync failed.\nPoke any to exit");
+      }
+      delay(1000);
+    }
   }
   else
   {
@@ -34,6 +69,8 @@ void setup()
     {
     }
   }
+  fed3.DisplayText(""); // clear display
+  fed3.UpdateDisplay();
 }
 
 // Handle feeding based on FR condition
