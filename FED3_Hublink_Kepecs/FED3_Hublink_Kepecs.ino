@@ -1,7 +1,13 @@
+// Note on Setting RTC: The RTC setting is based on the compile date and time. The only reliable
+// way to enforce that the __DATE__ and __TIME__ are set correctly is to force a full recompile,
+// requiring that the cached sketches be deleted.
+// On MacOS, this done by deleting: /Users/<YourUsername>/Library/Caches/arduino/sketches
+// On Windows, this done by deleting: C:\Users\<YourUsername>\AppData\Local\Arduino15\cache
+// Hublink with automatically set the time if you force sync
+
 #include <FED3.h>
 #include <Hublink.h>
 Hublink hublink(cardSelect);
-
 String sketch = "SharonCE";
 FED3 fed3(sketch);
 
