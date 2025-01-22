@@ -16,6 +16,13 @@ const int resetInterval = 1800;   // seconds until reset
 const int FR2 = 2;
 const int FR3 = 3;
 
+// Hublink callback function to handle timestamp
+void onTimestampReceived(uint32_t timestamp)
+{
+  Serial.print("Received timestamp: " + String(timestamp));
+  fed3.adjustRTC(timestamp);
+}
+
 void setup()
 {
   fed3.FED3Menu = true;
@@ -25,6 +32,8 @@ void setup()
   if (hublink.begin())
   {
     Serial.println("✓ Hublink.");
+    hublink.setTimestampCallback(onTimestampReceived);
+
     fed3.DisplayText("Sync Hublink?\nYES: Poke right\nNO: Poke left");
     delay(1000); // debounce previous mouse menu
     unsigned long startTime = millis();
@@ -48,7 +57,7 @@ void setup()
     fed3.Left = false;
     fed3.Right = false;
 
-    while (!fed3.Left && !fed3.Right)
+    while (!fed3.Left && !fed3.Right && doSync)
     {
       if (success)
       {
