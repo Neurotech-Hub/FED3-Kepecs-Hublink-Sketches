@@ -53,6 +53,7 @@ void setup() {
         success = hublink.sync(120);  // sync for 120 seconds
         break;
       }
+      delay(100);
     }
 
     fed3.Left = false;
@@ -66,7 +67,7 @@ void setup() {
       }
     }
     fed3.DisplayText("Exiting...");
-    delay(3000); // debound user fingers in port
+    delay(3000);  // debound user fingers in port
   } else {
     Serial.println("✗ Failed.");
     // stops without SD card
@@ -213,7 +214,10 @@ void loop() {
   }
 
   fed3.run();
-  hublink.sync();
+  if (hublink.sync()) {
+    fed3.Event = "HublinkSync";
+    fed3.logdata();
+  }
 }
 
 void Timer_reset() {
