@@ -41,6 +41,7 @@ void setup()
   fed3.FED3Menu = true;
   fed3.enableSleep();
   fed3.createDailyFile = true;
+  fed3.diskDispenseSteps = -300;
   fed3.begin();
 
   if (hublink.begin())
