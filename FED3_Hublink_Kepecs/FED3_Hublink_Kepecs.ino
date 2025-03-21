@@ -254,6 +254,13 @@ void loop()
   {
     fed3.Event = "HublinkSync";
     fed3.logdata();
+    if (fed3.pelletIsStuck)
+    {
+      fed3.DisplayJammed();
+      fed3.detachWakeupInterrupts();
+      fed3.sleepForever();
+      // requires reboot to clear jammed state
+    }
   }
 }
 
